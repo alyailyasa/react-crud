@@ -40,7 +40,7 @@ export const addNewUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
     "users/updateUser",
     async ({ userId, updatedUserData }, { rejectWithValue }) => {
-    const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6'; // Replace with your actual access token
+    const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
 
     try {
         const response = await fetch(`https://gorest.co.in/public/v2/users/${userId}`, {

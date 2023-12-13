@@ -53,11 +53,11 @@ const AddNewUser = () => {
     <div>
       <section className="antialiased bg-gray-100 text-black h-screen px-4">
         <div className="flex flex-col justify-center h-full gap-7">
-          <div className="w-full max-w-3xl px-14 py-20 mx-auto bg-white shadow-lg rounded-sm border border-gray-200 h-[600px]">
-            <div className="overflow-x-auto ">
+          <div className="w-full max-w-3xl lg:px-14 px-5 py-20 mx-auto bg-white shadow-lg rounded-sm border border-gray-200 h-[600px]">
+            <div className=" ">
               <div className="text-xl font-bold">Add New Data</div>
               <form onSubmit={handleAddUser}>
-                <div className="mt-16 pl-32 flex flex-col gap-5">
+                <div className="mt-16 lg:pl-32 pl-0 flex flex-col gap-5">
                   <div className="flex gap-10 items-center">
                     <label className="w-[50px]">Name</label>
                     <input className="border-2 border-black w-[300px] p-1" type="text" value={name} onChange={(e) => setName(e.target.value)} />
