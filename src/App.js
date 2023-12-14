@@ -9,6 +9,7 @@ function App() {
   const { users, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [confirmDelete, setConfirmDelete] = useState(null);
+  const navigate = useNavigate();
 
   console.log(users)
   useEffect(() => {
