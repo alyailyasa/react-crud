@@ -94,12 +94,12 @@ function App() {
   return (
     <section className="antialiased bg-gray-100 text-gray-600 h-screen px-4">
       <div className="flex flex-col justify-center h-full gap-7">
-        <div className="w-full max-w-6xl mx-auto flex justify-end">
+        <div className="w-full max-w-5xl mx-auto flex justify-end">
           <Link to="/add-new" className="w-[100px] p-2 bg-blue-700 text-center text-white rounded-md cursor-pointer">
             Add New
           </Link>
         </div>
-        <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+        <div className="w-full max-w-5xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
           <div className="overflow-x-auto">
             <table className="table-auto w-full">
               <thead className="text-md text-left uppercase text-black bg-gray-50">
