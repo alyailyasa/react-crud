@@ -101,7 +101,7 @@ function App() {
       }
 
       handlePopupClose();
-      Navigate("/")
+      navigate("/")
     } catch (error) {
       console.error("Error updating:", error.message);
     }
