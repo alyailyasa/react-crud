@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from './redux/feature/userSlice';
+import { getUsers, updateUser } from './redux/feature/userSlice';
 import { Link } from 'react-router-dom';
 
  
@@ -38,6 +38,7 @@ function App() {
       })
       .then(() => {
         console.log('User deleted successfully');
+        window.location.reload(); 
         dispatch(getUsers());
       })
       .catch((error) => console.error(error));
@@ -45,7 +46,6 @@ function App() {
     setConfirmDelete(null);
   };
   
-
   const handleCancelDelete = () => {
     setConfirmDelete(null);
   };
@@ -83,29 +83,13 @@ function App() {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
-      const response = await fetch(
-        `https://gorest.co.in/public/v2/users/${editingUserId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify(editedUser),
-        }
-      );
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(JSON.stringify(errorData));
-      }
-
+      await dispatch(updateUser({ userId: editingUserId, updatedUserData: editedUser }));
       handlePopupClose();
     } catch (error) {
       console.error("Error updating:", error.message);
     }
   };
+
   
   return (
     <section className="antialiased bg-gray-100 text-gray-600 h-screen px-4">
@@ -233,7 +217,6 @@ function App() {
                         <option className="cursor-pointer" value="female">Female</option>
                       </select>
                     </div>
-
                     <div className="flex lg:gap-10 gap-5 items-center">
                       <label className="w-[50px]">Status</label>
                       <select
