@@ -56,6 +56,7 @@ function App() {
   const handlePopupClose = () => {
     setEditingUserId(null);
     setPopupOpen(false);
+    window.location.reload(); 
   };
 
   const [editedUser, setEditedUser] = useState({
@@ -79,7 +80,8 @@ function App() {
     setPopupOpen(true);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     try {
       const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
       const response = await fetch(
@@ -247,7 +249,7 @@ function App() {
                   <div className="mt-28 flex justify-end">
                     <button className="w-[100px] p-2 bg-blue-700 text-center text-white rounded-md cursor-pointer" 
                       type="submit"
-                      onClick={handleSave}
+                      onClick={(e) => handleSave(e)}
                     >
                       Save
                     </button>
