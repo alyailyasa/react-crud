@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from './redux/feature/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
  
 function App() {
   const { users, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [confirmDelete, setConfirmDelete] = useState(null);
-  const navigate = useNavigate();
 
   console.log(users)
   useEffect(() => {
@@ -101,7 +100,6 @@ function App() {
       }
 
       handlePopupClose();
-      navigate("/")
     } catch (error) {
       console.error("Error updating:", error.message);
     }
@@ -209,15 +207,15 @@ function App() {
                     <div className="flex lg:gap-10 gap-5 items-center">
                       <label className="w-[50px]">Name</label>
                       <input className="border-2 border-black lg:w-[300px] w-max p-1" 
+                        type="text"
                         value={editedUser.name}
                         onChange={(e) => setEditedUser({ ...editedUser, name: e.target.value })}
-                        type="text"
                       />
                     </div>
                     <div className="flex lg:gap-10 gap-5 items-center">
                       <label className="w-[50px]">Email</label>
                       <input className="border-2 border-black lg:w-[300px] w-max p-1" 
-                        type="text" 
+                        type="email" 
                         value={editedUser.email}
                         onChange={(e) => setEditedUser({ ...editedUser, email: e.target.value })}  
                       />
