@@ -121,7 +121,7 @@ function App() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="text-sm divide-y divide-gray-100">
+              <tbody className="text-md divide-y divide-gray-100">
                 {users.map((user) => (
                   <tr key={user.id} className="hover:bg-gray-100">
                     <td className="p-2 whitespace-nowrap">
