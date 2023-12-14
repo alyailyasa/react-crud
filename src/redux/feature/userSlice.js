@@ -1,17 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const getUsers = createAsyncThunk("users/getUsers", async () => {
-  return fetch("https://gorest.co.in/public/v2/users").then((res) =>
-    res.json()
-  );
+export const getUsers = createAsyncThunk("users/getUsers", async (_, thunkAPI) => {
+  try {
+    const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
+    const response = await fetch("https://gorest.co.in/public/v2/users", {
+      method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(JSON.stringify(errorData));
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+    throw error;
+  }
 });
+
 
 export const addNewUser = createAsyncThunk(
   "users/addNewUser",
   async (userData, { rejectWithValue }) => {
     const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
-
     try {
       const response = await fetch("https://gorest.co.in/public/v2/users", {
         method: "POST",
@@ -38,31 +56,31 @@ export const addNewUser = createAsyncThunk(
 );
 
 export const updateUser = createAsyncThunk(
-    "users/updateUser",
-    async ({ userId, updatedUserData }, { rejectWithValue }) => {
-    const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
+  "users/updateUser",
+  async ({ userId, updatedUserData }, { rejectWithValue }) => {
+  const authToken = '9150946fd4fe823aa30c831ce5d19bfb9ea54fb4780e9470cc41dab35176b7b6';
 
-    try {
-        const response = await fetch(`https://gorest.co.in/public/v2/users/${userId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(updatedUserData),
-        });
+  try {
+      const response = await fetch(`https://gorest.co.in/public/v2/users/${userId}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(updatedUserData),
+      });
 
-        if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(JSON.stringify(errorData));
-        }
+      if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(JSON.stringify(errorData));
+      }
 
-        return response.json();
-    } catch (error) {
-        console.error('Error updating user:', error.message);
-        return rejectWithValue(error.message);
-    }
-    }
+      return response.json();
+  } catch (error) {
+      console.error('Error updating user:', error.message);
+      return rejectWithValue(error.message);
+  }
+  }
 );
 
 const userSlice = createSlice({
@@ -102,8 +120,6 @@ const userSlice = createSlice({
       });
   },
 });
-
-    
 
 export default userSlice.reducer;
 
