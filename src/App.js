@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from './redux/feature/userSlice';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
  
 function App() {
@@ -100,6 +100,7 @@ function App() {
       }
 
       handlePopupClose();
+      Navigate("/")
     } catch (error) {
       console.error("Error updating:", error.message);
     }
